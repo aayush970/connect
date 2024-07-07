@@ -136,7 +136,7 @@
     </div>
 
     <script>
-        const apiUrl = 'https://script.google.com/macros/s/AKfycbzeoLX4gK3Ul8eu98jX9fphIeeyp3siacsTqyaoIwG-2hE24rC2l-BJaCdLpyVmRUwv/exec'; 
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbyuPokcAORRAlzx9dctIdEvHOamM-soWmbYIp_8wmYynMV7L3E7lX042vTYUbTHEFOk/exec';  
 
         function showPopup() {
             document.getElementById('popup').style.display = 'flex';
@@ -147,13 +147,16 @@
             const phone = document.getElementById('phone').value;
             console.log('**********' , name, phone)
             if (name && phone) {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('phone', phone);
                 const data = { name: name, phone: phone };
                 fetch(apiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
+                    //headers: {
+                      //  'Content-Type': 'application/json',
+                    //},
+                    body: formData,
                 })
                 .then(response => response.json())
                 .then(data => {

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTT Webpage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .block {
+            background-color: #333;
+            margin: 10px;
+            padding: 10px;
+            width: 300px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .block img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .cta {
+            background-color: #e50914;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .cta:hover {
+            background-color: #f40612;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: #fff;
+            color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+        .popup-content input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .popup-content button {
+            background-color: #e50914;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .popup-content button:hover {
+            background-color: #f40612;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="block">
+            <img src="https://iili.io/dKtfBDB.md.jpg" alt="Lootere">
+            <h3>Lootere</h3>
+            <button class="cta" onclick="showPopup()">Watch Now for ₹25 ONLY</button>
+        </div>
+        <div class="block">
+            <img src="https://iili.io/dKtfyeR.md.jpg" alt="Teerandaz">
+            <h3>Teerandaz</h3>
+            <button class="cta" onclick="showPopup()">Watch Now for ₹25 ONLY</button>
+        </div>
+        <div class="block">
+            <img src="https://iili.io/dKtq5ru.md.jpg" alt="Hostages">
+            <h3>Hostages</h3>
+            <button class="cta" onclick="showPopup()">Watch Now for ₹25 ONLY</button>
+        </div>
+        <div class="block">
+            <img src="https://iili.io/dKtnPYg.md.jpg" alt="Luv Ki Arrange Marriage">
+            <h3>Luv Ki Arrange Marriage</h3>
+            <button class="cta" onclick="showPopup()">Watch Now for ₹25 ONLY</button>
+        </div>
+        <div class="block">
+            <img src="https://iili.io/dKtI93P.md.jpg" alt="College Romance">
+            <h3>College Romance</h3>
+            <button class="cta" onclick="showPopup()">Watch Now for ₹25 ONLY</button>
+        </div>
+        <div class="block">
+            <img src="https://iili.io/dKtx0s2.md.jpg" alt="India Lockdown">
+            <h3>India Lockdown</h3>
+            <button class="cta" onclick="showPopup()">Watch Now for ₹25 ONLY</button>
+        </div>
+        <div class="block">
+            <img src="https://iili.io/dKtx4ea.md.jpg" alt="Kathmandu Connection">
+            <h3>Kathmandu Connection</h3>
+            <button class="cta" onclick="showPopup()">Watch Now for ₹25 ONLY</button>
+        </div>
+        <div class="block">
+            <img src="https://iili.io/dKtzj2t.md.jpg" alt="Family Aaj Kal">
+            <h3>Family Aaj Kal</h3>
+            <button class="cta" onclick="showPopup()">Watch Now for ₹25 ONLY</button>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2>Register to Watch Now</h2>
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="phone" placeholder="Phone Number">
+            <button onclick="register()">Register</button>
+        </div>
+    </div>
+
+    <script>
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbzeoLX4gK3Ul8eu98jX9fphIeeyp3siacsTqyaoIwG-2hE24rC2l-BJaCdLpyVmRUwv/exec'; 
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function register() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            console.log('**********' , name, phone)
+            if (name && phone) {
+                const data = { name: name, phone: phone };
+                fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Registered successfully!');
+                    document.getElementById('popup').style.display = 'none';
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            } else {
+                alert('Please fill in both fields');
+            }
+        }
+
+        window.onclick = function(event) {
+            const popup = document.getElementById('popup');
+            if (event.target == popup) {
+                popup.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
